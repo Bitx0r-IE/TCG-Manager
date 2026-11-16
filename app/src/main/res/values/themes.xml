@@ -6,4 +6,12 @@
     </style>
 
     <style name="Theme.TCGManager" parent="Base.Theme.TCGManager" />
+
+    <!-- Heading above each section on the card detail screen. -->
+    <style name="TextAppearance.TCGManager.SectionLabel" parent="">
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:layout_marginBottom">4dp</item>
+        <item name="android:textAppearance">?attr/textAppearanceLabelLarge</item>
+        <item name="android:textColor">?attr/colorPrimary</item>
+    </style>
 </resources>

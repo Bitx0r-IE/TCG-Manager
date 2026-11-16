@@ -1,7 +1,8 @@
-package com.example.tcg_manager
+package com.example.tcg_manager.ui
+
+import com.example.tcg_manager.R
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.activity.enableEdgeToEdge
 import androidx.core.view.ViewCompat
@@ -41,10 +42,10 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null)
-                .setAnchorView(R.id.fab).show()
+        // The button opens the collection; hidden while already on it.
+        binding.fab.setOnClickListener { navController.navigate(R.id.collectionFragment) }
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if (destination.id == R.id.collectionFragment) binding.fab.hide() else binding.fab.show()
         }
     }
 

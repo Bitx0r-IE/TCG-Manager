@@ -3,26 +3,33 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/scanFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.example.tcg_manager.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        android:id="@+id/scanFragment"
+        android:name="com.example.tcg_manager.ui.scan.ScanFragment"
+        android:label="@string/scan_label"
+        tools:layout="@layout/fragment_scan">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_scan_to_cardDetail"
+            app:destination="@id/cardDetailFragment" />
     </fragment>
+
     <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.example.tcg_manager.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+        android:id="@+id/cardDetailFragment"
+        android:name="com.example.tcg_manager.ui.card.CardDetailFragment"
+        android:label="@string/detail_label"
+        tools:layout="@layout/fragment_card_detail" />
+
+    <fragment
+        android:id="@+id/collectionFragment"
+        android:name="com.example.tcg_manager.ui.collection.CollectionFragment"
+        android:label="@string/collection_label"
+        tools:layout="@layout/fragment_collection">
 
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_collection_to_cardDetail"
+            app:destination="@id/cardDetailFragment" />
     </fragment>
 </navigation>
