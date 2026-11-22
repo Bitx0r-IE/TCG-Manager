@@ -14,10 +14,18 @@ Android app to scan trading cards (Magic: The Gathering, Pokémon TCG, …), loo
 
 | Game | API | ID | Name | Description | Image |
 |---|---|:-:|:-:|:-:|:-:|
-| Magic: The Gathering | [Scryfall](https://scryfall.com/docs/api) | ✅ | ✅ (fuzzy) | ✅ (rules text) | OCR fallback |
+| Magic: The Gathering | [magicthegathering.io](https://docs.magicthegathering.io) via [mtg-sdk-kotlin](https://github.com/MagicTheGathering/mtg-sdk-kotlin) | ✅ (multiverse id or UUID) | ✅ (exact, then partial) | ✅ (rules text) | OCR fallback |
 | Pokémon TCG | [pokemontcg.io](https://docs.pokemontcg.io) | ✅ | ✅ | ✅ (flavour / ability text) | OCR fallback |
 
 Neither API needs a key. pokemontcg.io can be unreliable (intermittent 5xx); the app retries failed requests automatically.
+
+### Notes on mtg-sdk-kotlin
+
+- It is only available from **JitPack** (`com.github.MagicTheGathering:mtg-sdk-kotlin:1.0.4`); the JCenter repository in its README no longer exists. JitPack is enabled in `settings.gradle.kts` for that group only.
+- The SDK is used for name search and multiverse-id lookup. It has no rules-text search and only accepts numeric multiverse ids, so those two calls go straight to the API (`data/remote/mtg/MtgIoApi.kt`).
+- The SDK's model marks some fields as non-null that the API omits (e.g. lands have no `manaCost`), truncates fractional mana values (0.5 → 0) and has no flavour-text field. `MtgIoProvider` reads every field defensively; flavour text appears only for results of direct API calls.
+- magicthegathering.io has no price data.
+- Rate limit: 5000 requests per hour.
 
 ## Requirements
 
@@ -49,12 +57,14 @@ app/src/main/java/com/example/tcg_manager/
 │   │   ├── entity/           CardEntity + mappers
 │   │   └── dao/              CardDao
 │   ├── remote/               CardApiProvider interface, registry, HTTP setup
-│   │   ├── scryfall/         Magic: The Gathering
+│   │   ├── mtg/              Magic: The Gathering (mtg-sdk-kotlin + direct calls)
 │   │   └── pokemon/          Pokémon TCG
 │   └── repository/           CardSearchRepository, CollectionRepository
 ├── scanner/                  ML Kit OCR, game detection, name extraction
 ├── ui/
-│   ├── MainActivity.kt
+│   ├── MainActivity.kt       toolbar, bottom bar (Main / Collection / Decks), scan button
+│   ├── home/                 Main tab: one widget per game (MTG, Pokémon, Yu-Gi-Oh!)
+│   ├── decks/                Decks tab (work in progress)
 │   ├── scan/                 camera + manual search
 │   ├── card/                 card details + "add to collection?"
 │   └── collection/           saved cards with quantities
@@ -82,7 +92,7 @@ A single `cards` table, keyed by `(source, externalId)`. It stores the common ca
 
 ## Tech stack
 
-Kotlin · Views + ViewBinding · Navigation · ViewModel + coroutines/Flow · Room (KSP) · Retrofit + Gson · CameraX · ML Kit Text Recognition
+Kotlin · Views + ViewBinding · Navigation · ViewModel + coroutines/Flow · Room (KSP) · Retrofit + Gson · mtg-sdk-kotlin · CameraX · ML Kit Text Recognition
 
 ## Known limitations
 

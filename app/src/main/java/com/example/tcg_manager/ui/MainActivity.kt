@@ -12,6 +12,8 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
+import androidx.core.view.isVisible
 import android.view.Menu
 import android.view.MenuItem
 import com.example.tcg_manager.databinding.ActivityMainBinding
@@ -31,7 +33,8 @@ class MainActivity : AppCompatActivity() {
         ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+            // Consumed here so the bottom bar doesn't add the same padding a second time.
+            WindowInsetsCompat.CONSUMED
         }
         setSupportActionBar(binding.toolbar)
 
@@ -39,13 +42,18 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_main) as NavHostFragment
         val navController = navHostFragment.navController
 
-        appBarConfiguration = AppBarConfiguration(navController.graph)
+        // The three bottom-bar tabs are top-level: no back arrow on them.
+        appBarConfiguration = AppBarConfiguration(TOP_LEVEL_DESTINATIONS)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
-        // The button opens the collection; hidden while already on it.
-        binding.fab.setOnClickListener { navController.navigate(R.id.collectionFragment) }
+        val content = binding.content
+        content.bottomNav.setupWithNavController(navController)
+        content.fab.setOnClickListener { navController.navigate(R.id.scanFragment) }
+
+        // Bottom bar only on the tabs; scan button only where scanning makes sense.
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id == R.id.collectionFragment) binding.fab.hide() else binding.fab.show()
+            content.bottomNav.isVisible = destination.id in TOP_LEVEL_DESTINATIONS
+            if (destination.id in SCAN_BUTTON_DESTINATIONS) content.fab.show() else content.fab.hide()
         }
     }
 
@@ -69,5 +77,10 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
+    }
+
+    private companion object {
+        val TOP_LEVEL_DESTINATIONS = setOf(R.id.homeFragment, R.id.collectionFragment, R.id.decksFragment)
+        val SCAN_BUTTON_DESTINATIONS = setOf(R.id.homeFragment, R.id.collectionFragment)
     }
 }

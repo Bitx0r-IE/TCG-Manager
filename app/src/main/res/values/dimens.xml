@@ -1,4 +1,6 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="dialog_padding">24dp</dimen>
+    <!-- Space kept free at the bottom of screens so the floating button doesn't cover content. -->
+    <dimen name="fab_clearance">88dp</dimen>
 </resources>

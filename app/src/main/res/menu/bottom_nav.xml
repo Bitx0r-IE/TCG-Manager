@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Item ids must match the destination ids in nav_graph.xml so NavigationUI can link them. -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/homeFragment"
+        android:icon="@drawable/ic_home"
+        android:title="@string/nav_main" />
+    <item
+        android:id="@+id/collectionFragment"
+        android:icon="@drawable/ic_collection"
+        android:title="@string/nav_collection" />
+    <item
+        android:id="@+id/decksFragment"
+        android:icon="@drawable/ic_decks"
+        android:title="@string/nav_decks" />
+</menu>

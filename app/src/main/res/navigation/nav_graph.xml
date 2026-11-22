@@ -3,8 +3,33 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/scanFragment">
+    app:startDestination="@id/homeFragment">
 
+    <!-- Bottom bar tabs (ids match menu/bottom_nav.xml) -->
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.tcg_manager.ui.home.HomeFragment"
+        android:label="@string/nav_main"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/collectionFragment"
+        android:name="com.example.tcg_manager.ui.collection.CollectionFragment"
+        android:label="@string/collection_label"
+        tools:layout="@layout/fragment_collection">
+
+        <action
+            android:id="@+id/action_collection_to_cardDetail"
+            app:destination="@id/cardDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/decksFragment"
+        android:name="com.example.tcg_manager.ui.decks.DecksFragment"
+        android:label="@string/nav_decks"
+        tools:layout="@layout/fragment_decks" />
+
+    <!-- Opened from the scan button -->
     <fragment
         android:id="@+id/scanFragment"
         android:name="com.example.tcg_manager.ui.scan.ScanFragment"
@@ -21,15 +46,4 @@
         android:name="com.example.tcg_manager.ui.card.CardDetailFragment"
         android:label="@string/detail_label"
         tools:layout="@layout/fragment_card_detail" />
-
-    <fragment
-        android:id="@+id/collectionFragment"
-        android:name="com.example.tcg_manager.ui.collection.CollectionFragment"
-        android:label="@string/collection_label"
-        tools:layout="@layout/fragment_collection">
-
-        <action
-            android:id="@+id/action_collection_to_cardDetail"
-            app:destination="@id/cardDetailFragment" />
-    </fragment>
 </navigation>

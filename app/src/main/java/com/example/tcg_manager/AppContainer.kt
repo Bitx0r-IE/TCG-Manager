@@ -3,8 +3,8 @@ package com.example.tcg_manager
 import android.content.Context
 import com.example.tcg_manager.data.local.db.AppDatabase
 import com.example.tcg_manager.data.remote.CardApiRegistry
+import com.example.tcg_manager.data.remote.mtg.MtgIoProvider
 import com.example.tcg_manager.data.remote.pokemon.PokemonTcgProvider
-import com.example.tcg_manager.data.remote.scryfall.ScryfallProvider
 import com.example.tcg_manager.data.repository.CardSearchRepository
 import com.example.tcg_manager.data.repository.CollectionRepository
 import com.example.tcg_manager.scanner.CardTextRecognizer
@@ -18,7 +18,7 @@ class AppContainer(context: Context) {
     val apiRegistry by lazy {
         CardApiRegistry(
             listOf(
-                ScryfallProvider(),
+                MtgIoProvider(),
                 PokemonTcgProvider(),
             )
         )

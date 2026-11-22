@@ -10,7 +10,7 @@ import java.io.IOException
 import java.util.concurrent.TimeUnit
 
 object HttpClients {
-    /** Some APIs (e.g. Scryfall) require an identifying User-Agent. */
+    /** Some APIs require an identifying User-Agent. */
     private const val USER_AGENT = "TCGManager/1.0"
 
     fun retrofit(baseUrl: String, extraHeaders: Map<String, String> = emptyMap()): Retrofit {

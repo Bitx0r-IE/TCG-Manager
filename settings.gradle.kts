@@ -19,6 +19,10 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        // mtg-sdk-kotlin is only published through JitPack (its original JCenter repo is gone).
+        maven("https://jitpack.io") {
+            content { includeGroup("com.github.MagicTheGathering") }
+        }
     }
 }
 

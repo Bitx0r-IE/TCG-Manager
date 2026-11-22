@@ -1,10 +1,29 @@
 <resources>
     <string name="app_name">TCG-Manager</string>
     <string name="action_settings">Settings</string>
-    <string name="open_collection">Open collection</string>
+
+    <!-- Bottom bar -->
+    <string name="nav_main">Main</string>
+    <string name="nav_collection">Collection</string>
+    <string name="nav_decks">Decks</string>
+
+    <!-- Games -->
+    <string name="game_magic">Magic: The Gathering</string>
+    <string name="game_pokemon">Pokémon TCG</string>
+    <string name="game_yugioh">Yu-Gi-Oh!</string>
+
+    <!-- Main -->
+    <string name="home_title">Your games</string>
+    <string name="home_count_placeholder">— cards</string>
+    <string name="home_count_caption">Card count coming soon</string>
+
+    <!-- Decks -->
+    <string name="decks_wip_title">Work in progress</string>
+    <string name="decks_wip_message">Deck building is coming soon.</string>
 
     <!-- Scan -->
     <string name="scan_label">Scan card</string>
+    <string name="scan_open">Scan a card</string>
     <string name="scan_game_label">Game</string>
     <string name="scan_game_auto">Auto-detect</string>
     <string name="scan_preview_description">Camera preview</string>

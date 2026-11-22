@@ -6,14 +6,14 @@ import com.example.tcg_manager.data.model.CardGame
 import com.example.tcg_manager.data.model.SearchType
 
 /**
- * One card API (Scryfall, pokemontcg.io, …).
+ * One card API (magicthegathering.io, pokemontcg.io, …).
  *
  * Not every API offers every kind of search, so each provider declares its [capabilities]
  * and only overrides the calls it really supports. Calling an unsupported one throws
  * [UnsupportedSearchException]. Callers should check [supports] first.
  */
 interface CardApiProvider {
-    /** Stable id stored with saved cards, e.g. "scryfall". Never change it once released. */
+    /** Stable id stored with saved cards, e.g. "mtgio". Never change it once released. */
     val id: String
     val displayName: String
     val game: CardGame

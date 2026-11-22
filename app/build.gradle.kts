@@ -66,6 +66,11 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter.gson)
     implementation(libs.gson)
+    // Magic: The Gathering (magicthegathering.io). Its old OkHttp 3 logging module isn't used
+    // by the SDK and clashes with the OkHttp version Retrofit 3 brings in.
+    implementation(libs.mtg.sdk.kotlin) {
+        exclude(group = "com.squareup.okhttp3", module = "logging-interceptor")
+    }
 
     // Scanning (ML Kit OCR + CameraX)
     implementation(libs.mlkit.text.recognition)

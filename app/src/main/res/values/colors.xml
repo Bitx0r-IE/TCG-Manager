@@ -2,4 +2,9 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Accent colour of each game's widget on the main screen. -->
+    <color name="game_magic">#FFB4541E</color>
+    <color name="game_pokemon">#FFD7261E</color>
+    <color name="game_yugioh">#FF6A3FA0</color>
 </resources>

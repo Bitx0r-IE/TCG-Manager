@@ -5,10 +5,10 @@ package com.example.tcg_manager.data.model
  *
  * Fields every game has are typed properties. Game-specific stats (power/toughness, HP,
  * attacks, weaknesses…) go into [stats] so new games don't need schema changes.
- * [rawJson] keeps the full, untouched API response so no received data is ever lost.
+ * [rawJson] keeps everything the API (or its SDK) returned for the card, so no received data is lost.
  */
 data class Card(
-    /** Id of the [com.example.tcg_manager.data.remote.CardApiProvider] that returned it, e.g. "scryfall". */
+    /** Id of the [com.example.tcg_manager.data.remote.CardApiProvider] that returned it, e.g. "mtgio". */
     val source: String,
     /** The card's id inside that API. Together with [source] it uniquely identifies the card. */
     val externalId: String,
